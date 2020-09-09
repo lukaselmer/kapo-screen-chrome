@@ -5,9 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "mkdir -p dist && cp manifest.json dist && concurrently -c 'bgGreen,bgRed' npm:tsc-watch npm:lint",
+    "start": "mkdir -p dist && cp manifest.json dist && concurrently -c 'bgGreen,bgRed' npm:tsc-watch npm:lint-watch",
     "tsc-watch": "tsc --watch --pretty --project .",
-    "lint": "onchange -i '**/*.ts' -e 'dist/**/*.*' -- yarn lint-once",
+    "ci": "tsc --pretty --project . && yarn lint-once",
+    "lint-watch": "onchange -i '**/*.ts' -e 'dist/**/*.*' -- yarn lint-once",
     "lint-once": "yarn lint-prettier && yarn lint-eslint",
     "lint-prettier": "prettier --list-different --write './**/*.(ts|json|md)'",
     "lint-eslint": "eslint --fix ."
