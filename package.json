@@ -1,0 +1,24 @@
+{
+  "name": "kapo-screen-chrome",
+  "version": "1.0.0",
+  "description": "Kapo-Screen Chrome Extension",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "mkdir -p dist && cp manifest.json dist && tsc --watch --pretty --project ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lukaselmer/kapo-screen-chrome.git"
+  },
+  "author": "Lukas Elmer <lukas.elmer@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lukaselmer/kapo-screen-chrome/issues"
+  },
+  "homepage": "https://github.com/lukaselmer/kapo-screen-chrome#readme",
+  "dependencies": {
+    "@types/chrome": "^0.0.117",
+    "typescript": "^3.9.6"
+  }
+}
