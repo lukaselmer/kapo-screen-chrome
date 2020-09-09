@@ -20,3 +20,8 @@ yarn start
 
 Go to chrome://extensions/ and enable `Developer mode`. Click `Load unpacked` and point to
 `kapo-screen-chrome/dist` directory.
+
+## Credits
+
+Developed by [Elmer Software Engineering GmbH](https://elmer.app) in association with
+[Kantonspolizei Zürich](kapo.zh.ch).
