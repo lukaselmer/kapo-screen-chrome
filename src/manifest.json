@@ -9,7 +9,7 @@
     {
       "js": ["contentscript.js"],
       "css": ["style.css"],
-      "matches": ["<all_urls>"]
+      "matches": ["*://*/GMSC/Workflows/Form*"]
     }
   ],
   "background": {
