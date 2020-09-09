@@ -1,0 +1,22 @@
+{
+  "manifest_version": 2,
+  "name": "Kapo-Screen",
+  "default_locale": "en",
+  "description": "Modifies the website so that the text becomes readable on large screens",
+  "version": "0.0.1",
+  "author": "Lukas Elmer <lukas.elmer@gmail.com>",
+  "permissions": ["tabs", "activeTab", "power"],
+  "content_scripts": [
+    {
+      "js": ["contentscript.js"],
+      "css": ["app.css"],
+      "matches": ["<all_urls>"]
+    }
+  ],
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
+  },
+  "content_security_policy": "script-src 'self'; object-src 'self'",
+  "homepage_url": "https://github.com/lukaselmer/kapo-screen-chrome"
+}
