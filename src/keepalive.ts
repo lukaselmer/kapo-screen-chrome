@@ -1,36 +1,72 @@
-const state = { last: Date.now() }
-const aliveMessagesInterval = 1
-const reloadCheckInterval = 1
-const reloadAfterSecondsUnseen = 3
+import { TabStates } from './tab-states'
 
-export function setupContentscriptAliveMessages(): void {
-  try {
-    sendAliveMessage()
-    setInterval(sendAliveMessage, 1000 * aliveMessagesInterval)
-  } catch (error) {
-    console.error(error)
-  }
+const tabStates = new TabStates()
+const checkIntervalSeconds = 1
+const challenge = 'Are you alive?'
+const response = "Yes, I'm alive"
+
+export function setupContentscriptChallengeListener(): void {
+  chrome.runtime.onMessage.addListener(
+    (request, _, sendResponse) => request === challenge && sendResponse(response)
+  )
 }
 
-function sendAliveMessage() {
-  chrome.runtime.sendMessage({ alive: true })
+export function setupBackgroundAliveChallenger(): void {
+  setInterval(() => void challengeTabs(), 1000 * checkIntervalSeconds)
 }
 
-export function setupBackgroundAliveReceiver(): void {
-  chrome.runtime.onMessage.addListener((request: { alive?: true } | undefined, sender) => {
-    const url = sender.tab?.url
-    if (!url) return
-    console.log(`Tab URL: ${url}`)
-    if (request?.alive) {
-      console.log(`Setting alive from: ${url}`)
-      state.last = Date.now()
+async function challengeTabs() {
+  const tabs = await relevantTabs()
+  tabStates.removeClosedTabChallenges(tabs.map(tab => tab.id))
+
+  tabs.forEach(tab => {
+    const id = tab.id as number
+    try {
+      tabStates.increasePendingChallenge(id)
+      if (tabStates.shouldReload(id)) reload(tab)
+      else sendAliveChallenge(id)
+    } catch (error) {
+      tabStates.increasePendingChallenge(id)
+      console.error(error)
     }
   })
-
-  setInterval(reloadIfNeeded, 1000 * reloadCheckInterval)
 }
 
-function reloadIfNeeded() {
-  const seenLastInSeconds = (Date.now() - state.last) / 1000
-  if (seenLastInSeconds > reloadAfterSecondsUnseen) console.log('Reload the tab...')
+function sendAliveChallenge(id: number) {
+  chrome.tabs.sendMessage(id, challenge, response => {
+    if (response === response) tabStates.resetPendingChallenges(id)
+  })
+}
+
+async function relevantTabs(): Promise<chrome.tabs.Tab[]> {
+  return new Promise(resolve =>
+    chrome.tabs.query({ windowType: 'normal', url: '*://*/GMSC/Workflows/Form*' }, tabs =>
+      resolve(tabs.filter(tab => tab.id))
+    )
+  )
+}
+
+function reload(tab: chrome.tabs.Tab) {
+  const id = tab.id as number
+  if (tabStates.shouldCloneTab(id)) {
+    cloneTab(tab)
+    tabStates.markTabAsCloned(id)
+    tabStates.resetPendingChallenges(id)
+  }
+  removeTab(id)
+}
+
+function cloneTab(tab: chrome.tabs.Tab) {
+  chrome.tabs.create({
+    windowId: tab.windowId,
+    openerTabId: tab.id,
+    url: tab.url,
+    index: tab.index,
+    active: tab.active,
+    selected: tab.selected,
+  })
+}
+
+function removeTab(id: number) {
+  chrome.tabs.remove(id)
 }

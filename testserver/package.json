@@ -9,7 +9,7 @@
     "http-server": "^0.12.3"
   },
   "scripts": {
-    "start": "yarn http",
+    "start": "echo \"http://127.0.0.1:8080/GMSC/Workflows/Form?options\" && yarn http",
     "http": "http-server -c0 data",
     "https": "http-server -c0 data --ssl"
   }

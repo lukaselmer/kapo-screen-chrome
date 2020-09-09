@@ -1,3 +1,3 @@
-import { setupBackgroundAliveReceiver } from './keepalive'
+import { setupBackgroundAliveChallenger } from './keepalive'
 
-setupBackgroundAliveReceiver()
+setupBackgroundAliveChallenger()

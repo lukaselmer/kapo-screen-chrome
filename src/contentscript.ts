@@ -1,10 +1,10 @@
 import { convertToSentences } from './sentences'
 import { parseInput, displaySentences, showRoot, isKapoScreen } from './ui'
 import { initReloadTabFallback } from './reload'
-import { setupContentscriptAliveMessages } from './keepalive'
+import { setupContentscriptChallengeListener } from './keepalive'
 
 function main() {
-  setupContentscriptAliveMessages()
+  setupContentscriptChallengeListener()
   presentNotes()
 }
 
