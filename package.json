@@ -7,11 +7,11 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "mkdir -p dist && cp manifest.json dist && concurrently -c 'bgGreen,bgRed' npm:tsc-watch npm:lint-watch",
     "tsc-watch": "tsc --watch --pretty --project .",
-    "ci": "tsc --pretty --project . && yarn lint-once",
-    "lint-watch": "onchange -i '**/*.ts' -e 'dist/**/*.*' -- yarn lint-once",
-    "lint-once": "yarn lint-prettier && yarn lint-eslint",
-    "lint-prettier": "prettier --list-different --write './**/*.(ts|json|md)'",
-    "lint-eslint": "eslint --fix ."
+    "lint-watch": "onchange -i '**/*.ts' -e 'dist/**/*.*' -- yarn lint",
+    "lint": "yarn lint-prettier && yarn lint-eslint",
+    "lint-prettier": "prettier --list-different --write './**/*.(ts|json|md|yml)'",
+    "lint-eslint": "eslint --fix .",
+    "ci": "tsc --pretty --project . && prettier --list-different './**/*.(ts|json|md|yml)' && eslint ."
   },
   "repository": {
     "type": "git",
