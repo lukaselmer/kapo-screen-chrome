@@ -10,7 +10,7 @@
   },
   "scripts": {
     "start": "yarn http",
-    "http": "http-server data",
-    "https": "http-server data --ssl"
+    "http": "http-server -c0 data",
+    "https": "http-server -c0 data --ssl"
   }
 }

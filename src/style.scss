@@ -3,16 +3,19 @@ body > #ig-root {
 }
 
 #kaposcreen_container {
+  position: absolute;
+  height: 100%;
   .kaposcreen__sentences {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
     font-size: 450%;
     line-height: 120%;
-    padding: 15px;
 
     .kaposcreen__sentence {
+      margin: 0 15px;
       border-bottom: 2px solid #ccc;
-      &:last-child {
-        border-bottom: none;
-      }
     }
   }
 

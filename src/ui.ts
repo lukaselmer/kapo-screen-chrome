@@ -2,14 +2,14 @@ import { reloadTimeInSeconds } from './reload'
 
 const progressTimerState = { started: false, startedAt: new Date() }
 
-export function isKapoScreen() {
-  return (
+export function isKapoScreen(): boolean {
+  return !!(
     document.querySelector('#ig-menugroup-Grossbildanzeige') &&
     (document.querySelector('#GBA_1FormGroup') || document.querySelector('#GBA_2FormGroup'))
   )
 }
 
-export function showRoot() {
+export function showRoot(): void {
   const root = document.querySelector('#ig-root')
   if (root instanceof HTMLElement) root.style.display = 'block'
 }
@@ -31,7 +31,7 @@ function findOrCreateContainer() {
   const containerId = 'kaposcreen_container'
   const container = document.querySelector(`#${containerId}`)
   if (container instanceof HTMLDivElement) {
-    while (container.hasChildNodes()) container.removeChild(container.lastChild!)
+    while (container.lastChild) container.removeChild(container.lastChild)
     return container
   }
 
