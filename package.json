@@ -6,17 +6,18 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "ci": "tsc --pretty --project . && prettier --list-different './**/*.(scss|ts|json|md|yml)' && eslint . && yarn sass && yarn manifest",
-    "start": "yarn clean && concurrently -c 'bgCyan,bgRed,bgYellow,bgGreen' npm:tsc-watch npm:sass-watch npm:manifest-watch npm:lint-watch",
+    "start": "yarn clean && concurrently -c 'bgCyan,bgRed,bgYellow,bgGreen,bgWhite' npm:tsc-watch npm:sass-watch npm:manifest-watch npm:lint-watch npm:testserver",
     "tsc-watch": "tsc --watch --pretty --project .",
     "sass-watch": "onchange -i 'src/app.scss' -- yarn sass",
     "sass": "mkdir -p dist && sass src/app.scss dist/app.css",
     "manifest-watch": "onchange -i 'src/manifest.json' 'src/app.css' -- yarn manifest",
-    "manifest": "mkdir -p dist && cp src/manifest.json dist",
+    "manifest": "mkdir -p dist && cp src/manifest.json dist && cp node_modules/crx-hotreload/hot-reload.js dist",
     "lint-watch": "onchange -i '**/*.ts' -e 'dist/**/*.*' -- yarn lint",
     "lint": "yarn lint-prettier && yarn lint-eslint",
     "lint-prettier": "prettier --list-different --write './**/*.(scss|ts|json|md|yml)'",
     "lint-eslint": "eslint --fix .",
-    "clean": "rm -rf dist && mkdir dist"
+    "clean": "rm -rf dist && mkdir dist",
+    "testserver": "cd testserver && yarn start"
   },
   "repository": {
     "type": "git",
@@ -31,9 +32,11 @@
   "dependencies": {},
   "devDependencies": {
     "@types/chrome": "^0.0.117",
+    "@types/webpack-dev-server": "^3.11.0",
     "@typescript-eslint/eslint-plugin": "^3.5.0",
     "@typescript-eslint/parser": "^3.5.0",
     "concurrently": "^5.2.0",
+    "crx-hotreload": "^1.0.4",
     "eslint": "^7.4.0",
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-import": "^2.22.0",
@@ -43,6 +46,8 @@
     "onchange": "^7.0.2",
     "prettier": "^2.0.5",
     "sass": "^1.26.10",
-    "typescript": "^3.9.6"
+    "typescript": "^3.9.6",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.12"
   }
 }
