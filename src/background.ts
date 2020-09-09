@@ -1,1 +1,3 @@
-console.log('console.log from backgorund')
+import { setupBackgroundAliveReceiver } from './keepalive'
+
+setupBackgroundAliveReceiver()

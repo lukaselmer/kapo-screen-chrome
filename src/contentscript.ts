@@ -1,8 +1,14 @@
 import { convertToSentences } from './sentences'
 import { parseInput, displaySentences, showRoot, isKapoScreen } from './ui'
 import { initReloadTabFallback } from './reload'
+import { setupContentscriptAliveMessages } from './keepalive'
 
 function main() {
+  setupContentscriptAliveMessages()
+  presentNotes()
+}
+
+function presentNotes() {
   try {
     initReloadTabFallback()
     if (isKapoScreen()) {
