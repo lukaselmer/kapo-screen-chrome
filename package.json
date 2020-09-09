@@ -5,13 +5,18 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "mkdir -p dist && cp src/manifest.json dist && cp src/app.css dist && concurrently -c 'bgGreen,bgRed' npm:tsc-watch npm:lint-watch",
+    "ci": "tsc --pretty --project . && prettier --list-different './**/*.(scss|ts|json|md|yml)' && eslint . && yarn sass && yarn manifest",
+    "start": "yarn clean && concurrently -c 'bgCyan,bgRed,bgYellow,bgGreen' npm:tsc-watch npm:sass-watch npm:manifest-watch npm:lint-watch",
     "tsc-watch": "tsc --watch --pretty --project .",
+    "sass-watch": "onchange -i 'src/app.scss' -- yarn sass",
+    "sass": "mkdir -p dist && sass src/app.scss dist/app.css",
+    "manifest-watch": "onchange -i 'src/manifest.json' 'src/app.css' -- yarn manifest",
+    "manifest": "mkdir -p dist && cp src/manifest.json dist",
     "lint-watch": "onchange -i '**/*.ts' -e 'dist/**/*.*' -- yarn lint",
     "lint": "yarn lint-prettier && yarn lint-eslint",
-    "lint-prettier": "prettier --list-different --write './**/*.(ts|json|md|yml)'",
+    "lint-prettier": "prettier --list-different --write './**/*.(scss|ts|json|md|yml)'",
     "lint-eslint": "eslint --fix .",
-    "ci": "tsc --pretty --project . && prettier --list-different './**/*.(ts|json|md|yml)' && eslint ."
+    "clean": "rm -rf dist && mkdir dist"
   },
   "repository": {
     "type": "git",
@@ -37,6 +42,7 @@
     "eslint-plugin-promise": "^4.2.1",
     "onchange": "^7.0.2",
     "prettier": "^2.0.5",
+    "sass": "^1.26.10",
     "typescript": "^3.9.6"
   }
 }
