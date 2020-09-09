@@ -8,7 +8,7 @@
   "content_scripts": [
     {
       "js": ["contentscript.js"],
-      "css": ["app.css"],
+      "css": ["style.css"],
       "matches": ["<all_urls>"]
     }
   ],

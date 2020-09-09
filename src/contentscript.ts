@@ -10,7 +10,7 @@ function parseInput(): InputParagraph[] {
     .map(el => (el.value ? { filled: true, value: el.value } : { filled: false, value: '' }))
 }
 
-function calculateParagraphs(inputValues: InputParagraph[]): string[] {
+export function calculateParagraphs(inputValues: InputParagraph[]): string[] {
   return inputValues.map(value => value.value)
 }
 
@@ -23,5 +23,6 @@ interface InputParagraph {
   value: string
 }
 
+console.log('extension loaded')
 console.log('extension loaded')
 main()
