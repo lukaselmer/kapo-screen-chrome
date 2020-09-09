@@ -1,2 +1,3 @@
-# kapo-screen-chrome
+# Kapo-Screen Chrome
+
 Kapo-Screen Chrome Extension
