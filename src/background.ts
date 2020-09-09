@@ -1,1 +1,1 @@
-console.log('console.log from backgorund');
+console.log('console.log from backgorund')
