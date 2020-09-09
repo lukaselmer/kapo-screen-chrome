@@ -13,5 +13,7 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: '14'
-      - run: yarn install
+      - uses: bahmutov/npm-install@v1
+        with:
+          working-directory: '.'
       - run: yarn ci
