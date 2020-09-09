@@ -1,0 +1,15 @@
+{
+  "name": "testserver",
+  "version": "0.0.1",
+  "description": "Kapo-Screen Testserver",
+  "main": "index.js",
+  "author": "Lukas Elmer <lukas.elmer@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "http-server": "^0.12.3"
+  },
+  "scripts": {
+    "http": "http-server data",
+    "https": "http-server data --ssl"
+  }
+}
