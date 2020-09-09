@@ -1,3 +1,5 @@
+![TSC and Linting](https://github.com/lukaselmer/kapo-screen-chrome/workflows/TSC%20and%20Linting/badge.svg)
+
 # Kapo-Screen Chrome
 
 Kapo-Screen Chrome Extension
