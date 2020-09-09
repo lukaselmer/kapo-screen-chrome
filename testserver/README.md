@@ -9,7 +9,11 @@ to be encrypted. It is stored in the private repository https://github.com/lukas
 Contact lukas.elmer@gmail.com or lukas@elmer.app if you are eligable to have access to it.
 
 The data was encrypted using 7zip AES256. Decrypt it using 7zip with the password, and put the decrypted
-content in a directory called `data`, so that the path `<git-repo>/testserver/data/index.html` exists.
+content in a directory called `data`, so that the path `<git-repo>/testserver/data/index.html` exists:
+
+```sh
+7z x data.7z
+```
 
 ### SSL Cert & Key
 
