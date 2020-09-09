@@ -1,9 +1,10 @@
-import { parseInput, calculateParagraphs, displayParagraphs } from './paragraphs'
+import { convertToSentences } from './sentences'
+import { parseInput, displaySentences } from './ui'
 
 function main() {
   const input = parseInput()
-  const paragraphs = calculateParagraphs(input)
-  displayParagraphs(paragraphs)
+  const sentences = convertToSentences(input)
+  displaySentences(sentences)
 }
 
 main()

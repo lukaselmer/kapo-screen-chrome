@@ -3,3 +3,4 @@ dist
 coverage
 testserver/data
 webpack.config.js
+jest.config.js
