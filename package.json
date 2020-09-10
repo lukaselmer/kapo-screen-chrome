@@ -1,8 +1,8 @@
 {
   "name": "kapo-screen-chrome",
-  "version": "1.0.0",
+  "version": "0.0.2",
   "description": "Kapo-Screen Chrome Extension",
-  "main": "index.js",
+  "main": "dist/contentscript.js",
   "husky": {
     "hooks": {
       "pre-commit": "yarn ci"

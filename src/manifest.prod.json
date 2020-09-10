@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "Kapo-Screen",
   "description": "Modifies the website so that the text becomes readable on large screens",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "author": "Lukas Elmer <lukas.elmer@gmail.com>",
   "permissions": ["tabs", "activeTab"],
   "content_scripts": [
