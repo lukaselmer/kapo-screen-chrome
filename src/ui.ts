@@ -1,7 +1,3 @@
-import { reloadTimeInSeconds } from './reload'
-
-const progressTimerState = { started: false, startedAt: new Date() }
-
 export function isKapoScreen(): boolean {
   return !!(
     document.querySelector('#ig-menugroup-Grossbildanzeige') &&
@@ -24,7 +20,6 @@ export function displaySentences(sentences: string[]): void {
   const outerContainer = findOrCreateContainer()
   addSentences(sentences, outerContainer)
   addFooter(outerContainer)
-  startProgressTimer()
 }
 
 function findOrCreateContainer() {
@@ -59,7 +54,6 @@ function addFooter(container: HTMLDivElement) {
   const child = document.createElement('footer')
   child.className = 'kaposcreen__footer'
   child.appendChild(createFooterText())
-  child.appendChild(createFooterProgress())
   container.appendChild(child)
 }
 
@@ -71,28 +65,7 @@ function createFooterText() {
   return footerNote
 }
 
-function createFooterProgress() {
-  const footerProgress = document.createElement('progress')
-  footerProgress.className = 'kaposcreen__footer-progress'
-  footerProgress.innerText = '70%'
-  footerProgress.value = 0
-  footerProgress.max = reloadTimeInSeconds * 1000
-  return footerProgress
-}
-
 function notesId() {
   const notesElement = document.querySelector('input#id')
   return notesElement instanceof HTMLInputElement ? notesElement.value : ''
-}
-
-function startProgressTimer() {
-  if (progressTimerState.started) return
-  progressTimerState.started = true
-  progressTimerState.startedAt = new Date()
-  setInterval(() => {
-    const progress = document.querySelector('progress.kaposcreen__footer-progress')
-    if (progress instanceof HTMLProgressElement) {
-      progress.value = new Date().getTime() - progressTimerState.startedAt.getTime() + 40
-    }
-  }, 1000 / 60 /* ~60 FPS */)
 }
